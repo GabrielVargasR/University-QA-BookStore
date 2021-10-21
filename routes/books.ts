@@ -5,12 +5,27 @@ const app = express();
 const bookController = new BookController();
 
 app.get("/", (req, res, next) => {
-  if (req.query.id) {
-      // use controller
-    res.send("<h1>Book with id</h1>");
+  if (req.query.isbn) {
+    bookController.getBook(req.query.isbn.toString())
+    .then((book : object) =>{
+        res.status(200).json({
+            query: req.query.q,
+            book
+        })
+    })
   } else {
-      // use controller
-    res.send("<h1>Books</h1>");
+    bookController.getBooks()
+    .then((books : object)=>{
+        res.status(200).json({
+            query: req.query.q,
+            books
+        });
+    })
+    .catch(() => {
+        res.status(400).json({
+            message: "Error: Couldn't fetch articles"
+        });
+    })
   }
 });
 
