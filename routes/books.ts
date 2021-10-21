@@ -4,6 +4,18 @@ import BookController from "../controllers/bookController";
 const app = express();
 const bookController = new BookController();
 
+// middleware for development stages only
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', "*");
+  next();
+});
+
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Headers', "*");
+  next();
+});
+
+
 app.get("/", (req, res, next) => {
   if (req.query.isbn) {
     bookController.getBook(req.query.isbn.toString())
