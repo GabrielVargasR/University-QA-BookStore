@@ -4,7 +4,7 @@
       "sourceMap": true,
       "noImplicitAny": true,
       "module": "commonjs",
-      "target": "es2021",
+      "target":  "ES6",
       "allowJs": true
     },
     "exclude":[

@@ -4,7 +4,7 @@
     "exec": "npm start",
     "ext": "ts",
     "env": {
-        "MONGO_DB_NAME": "articlesdb",
+        "MONGO_DB": "qa",
         "MONGO_HOST": "127.0.0.1:27017"
     }
 }

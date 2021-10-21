@@ -1,4 +1,5 @@
 import * as express from "express";
+import * as mongoose from "mongoose";
 import Logger from "./common/logger";
 import Routes from "./routes/routes";
 
@@ -9,9 +10,29 @@ class Api {
 
   constructor() {
     this.log = new Logger();
+    this.connectMongoose();
     this.express = express();
     this.middleware();
     this.routes();
+  }
+
+  private connectMongoose() {
+    const connectionURL = `mongodb://${process.env.MONGO_HOST}/${process.env.MONGO_DB}`;
+    try {
+      mongoose.connect(connectionURL, {
+        socketTimeoutMS: 2000,
+      })
+      .then(() => {
+        this.db = mongoose.connection;
+        this.log.info("Connected to Mongo");
+      })
+      .catch(()=>{
+        this.log.error("Error connecting to Mongo");
+      });
+
+    } catch (e) {
+      this.log.error(e);
+    }
   }
 
   // Configure Express middleware.
