@@ -123,4 +123,4 @@ dist
 .webpack/
 
 *.js
-!./frontend/*.js
+!/frontend/src/**
