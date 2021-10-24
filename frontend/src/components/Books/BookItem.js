@@ -3,6 +3,7 @@ import style from './BookItem.module.css'
 const BookItem = (props) => {
 
     const clickHandler = (event) => {
+        props.onClick(true, props.book.isbn);
         console.log(props.book.isbn);
     }
 
